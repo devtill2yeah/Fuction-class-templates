@@ -1,0 +1,82 @@
+<?php
+     // Define for MySQL //////////////////////////////////////////////
+     define('LOCALHOST','localhost');
+     define('DB_USER','****');
+     define('DB_PASS','****');
+     define('DB_NAME','****');
+
+     ////////////////////////////////////////////////////////
+     // Class
+     ////////////////////////////////////////////////////////
+     class DB {
+          var $host;          // host
+          var $user;          // user
+          var $pass;          // pass
+          var $db;            // MySQL_LinkID
+          var $database;      // DB name
+
+          ///////////////////////////////////////////////////////
+          // construct
+          ///////////////////////////////////////////////////////
+          function DB() {
+               $this->host     = LOCALHOST;
+               $this->user     = DB_USER;
+               $this->pass     = DB_PASS;
+               $this->database = DB_NAME;
+          }
+
+          ///////////////////////////////////////////////////////
+          // Connection
+          ///////////////////////////////////////////////////////
+          function con() {
+               $this->db = mysql_connect($this->host,$this->user,$this->pass);
+               if ( !$this->db ) {
+                   die ('mysql connect error : ' . mysql_error());
+               }
+              
+               $db_selected = mysql_select_db($this->database,$this->db);
+               if (!$db_selected) {
+                   die ('mysql select db error : ' . mysql_error());
+               }
+              
+          }
+
+          ///////////////////////////////////////////////////////
+          // Close
+          ///////////////////////////////////////////////////////
+          function close() {
+               mysql_close($this->db);
+          }
+
+          ///////////////////////////////////////////////////////
+          // Query
+          ///////////////////////////////////////////////////////
+          function query($query) {
+               $res = mysql_query($query,$this->db) or die("error : " . mysql_error($this->db)."<br />".$query);
+               return $res;
+          }
+     }
+
+      ////////////////////////////////////////////////////////
+     // ShortCut Function
+     ////////////////////////////////////////////////////////
+
+     // mysql_num_rows
+     function mnr($res) {
+          $num = mysql_num_rows($res);
+          return $num;
+     }
+
+     // mysql_fetch_assoc
+     function mfa($res) {
+          $rec = mysql_fetch_assoc($res);
+          return $rec;
+     }
+
+     // mysql_fetch_array
+     function mfar($res) {
+          $rec = mysql_fetch_array($res);
+          return $rec;
+     }
+
+?>
