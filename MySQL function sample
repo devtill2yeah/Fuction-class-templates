@@ -1,3 +1,4 @@
+
 <?php
      // Define for MySQL //////////////////////////////////////////////
      define('LOCALHOST','localhost');
@@ -80,3 +81,4 @@
      }
 
 ?>
+
