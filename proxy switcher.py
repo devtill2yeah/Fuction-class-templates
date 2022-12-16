@@ -1,6 +1,5 @@
 
 
-
 #we need to import a few things to make it work first
 from lxml.html import fromstring
 from itertools import cycle
