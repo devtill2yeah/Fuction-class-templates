@@ -44,7 +44,6 @@ class ProxyChecker():
                         print("[+] - {} added!".format(proxyAddress))
                     f.write(proxyAddress)
 
-
 def main():
     parser = arg.ArgumentParser()
     parser.add_argument("--file", "-f", type=str, required=True,
