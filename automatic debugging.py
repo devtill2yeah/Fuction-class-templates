@@ -8,6 +8,7 @@ def excepthook(ex_type, ex_val, ex_tb):
     Custom exception handler to provide PDB postmortems.
 
     Arguments:
+        
         ex_type Exception
             Class of ex_val.
         ex_val Exception
@@ -17,10 +18,12 @@ def excepthook(ex_type, ex_val, ex_tb):
     
     if ex_type in (KeyboardInterrupt, bdb.BdbQuit):
         return
+    
     elif ex_tb and not hasattr(sys, "ps1"):
         traceback.print_exception(ex_type, ex_val, ex_tb)
         pdb.post_mortem(ex_tb)
         return
+    
     else:
         sys.__excepthook__(ex_type, ex_val, ex_tb)
         return
